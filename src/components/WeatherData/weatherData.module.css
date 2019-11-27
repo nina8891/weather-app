@@ -1,0 +1,12 @@
+.WeatherData p {
+    margin: 10px 30px;
+}
+
+.WeatherData p span {
+    font-weight: bold;
+}
+
+.Error {
+    color: brown;
+    font-size: 13px;
+}
