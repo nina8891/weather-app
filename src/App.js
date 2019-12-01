@@ -1,35 +1,44 @@
 import React from 'react';
-import classes from './App.module.css';
 import Info from './components/info';
 import Form from './components/Form/form';
 import WeatherData from './components/WeatherData/weatherData';
 
-const API_KEY = 'd6d0f7bdfe76b433ced172c56fff7444'
+import './App.css';
+
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 class App extends React.Component {
-
   state = {
-    temp: undefined,
-    city: undefined,
-    country: undefined,
-    pressure: undefined,
-    sunset: undefined,
-    error: undefined
-  }
+    temp: null,
+    city: '',
+    country: null,
+    pressure: null,
+    sunset: null,
+    error: null,
+  };
 
-  gettingWeather = async (event) => {
-    event.preventDefault()
+  handleCityChange = event => {
+    this.setState({
+      city: event.currentTarget.value,
+    });
+  };
 
-    let city = event.target.elements.city.value
+  handleSubmit = async event => {
+    event.preventDefault();
+
+    const { city } = this.state;
 
     if (city) {
-      const api_url = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`)
-      const data = await api_url.json()
+      const api_url = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+      );
+      const data = await api_url.json();
 
-      let sunset = data.sys.sunset
-      let date = new Date()
-      date.setTime(sunset)
-      let sunset_date = date.getHours() + ':' + date.getMinutes() + ":" + date.getSeconds()
+      let sunset = data.sys.sunset;
+      let date = new Date();
+      date.setTime(sunset);
+      let sunset_date =
+        date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
 
       this.setState({
         temp: data.main.temp,
@@ -37,30 +46,32 @@ class App extends React.Component {
         country: data.sys.country,
         pressure: data.main.pressure,
         sunset: sunset_date,
-        error: ""
-      })
-    }  else {
+        error: '',
+      });
+    } else {
       this.setState({
         temp: undefined,
         city: undefined,
         country: undefined,
         pressure: undefined,
         sunset: undefined,
-        error: "Please enter city"
-      })  
+        error: 'Please enter city',
+      });
     }
-  }
+  };
 
   render() {
     return (
-      <div className={classes.App}>
-        <div className={classes.Blocks}>
-          <div className={classes.Left}>
-            <Info/>
+      <div className="App">
+        <div className="Blocks">
+          <div className="Left">
+            <Info />
           </div>
-          <div className={classes.Right}>
+          <div className="Right">
             <Form
-              weatherMethod={this.gettingWeather}
+              city={this.state.city}
+              handleSubmit={this.handleSubmit}
+              handleCityChange={this.handleCityChange}
             />
             <WeatherData
               temp={this.state.temp}
@@ -73,7 +84,7 @@ class App extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
