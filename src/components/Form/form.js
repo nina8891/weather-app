@@ -1,14 +1,15 @@
-import React from 'react'
-import classes from './form.module.css'
+import React from 'react';
 
-const Form = props =>(
-    <form 
-        className={classes.Form}
-        onSubmit={props.weatherMethod}
-    >
-        <input type="text" name="city" placeholder="City..." />
-        <button>Get forecast</button>
-    </form>
-)
+class Form extends React.Component {
+  render() {
+    const { city, handleCityChange, handleSubmit } = this.props;
 
-export default Form
+    return (
+      <form onSubmit={handleSubmit}>
+        <input type="text" onChange={handleCityChange} value={city} />
+      </form>
+    );
+  }
+}
+
+export default Form;
