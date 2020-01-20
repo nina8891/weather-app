@@ -17,4 +17,4 @@ A simple and convenient Weather app shows current air temperature, atmospheric p
 
 - [sass/scss](https://sass-lang.com/) is used to write stable and powerful CSS.
 
-_Autoprefixer_ is included and use [caniuse.com](http://caniuse.com/) database to avoid outdated prefixes. _You can forget CSS prefixes NOW._
+_Autoprefixer_ is included and use [caniuse.com](http://caniuse.com/) database to avoid outdated prefixes. 
