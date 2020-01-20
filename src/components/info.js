@@ -1,8 +1,8 @@
 import React from 'react'
-import classes from './info.module.css'
+import './info.css'
 
 const  Info = () => (
-    <div className={classes.Info}>
+    <div className='Info'>
         <h2>React Weather App</h2>
         <p>Weather forecast for your city.</p>
     </div>

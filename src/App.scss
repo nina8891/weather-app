@@ -11,6 +11,10 @@
     rgba(238, 174, 202, 1) 0%,
     rgba(148, 187, 233, 1) 100%
   );
+  @media screen and (max-width: 840px) {
+    background: rgb(238, 174, 202);
+    align-items: flex-start;
+  }
 }
 
 .Blocks {
@@ -20,14 +24,30 @@
   height: 450px;
   background: rgb(238, 174, 202);
   box-shadow: -2px -1px 12px 6px rgba(166, 153, 166, 0.77);
+
+  @media screen and (max-width: 840px) {
+    width: 100%;
+    flex-direction: column;
+    box-shadow: none;
+    
+  }
 }
 
 .Left {
   padding-top: 100px;
   width: 400px;
-  background: url('./img/img.jpg');
+  background: url('./img/img.jpg') no-repeat;
   text-align: center;
+
+  @media screen and (max-width: 840px) {
+    width: 100%;
+    background:rgb(238, 174, 202);
+    padding-top: 25px;
+  }
 }
 
-.Right {
-}
+// .Right {
+//   @media screen and (max-width: 840px) {
+//     width: 100%;
+//   }
+// }

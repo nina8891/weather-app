@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import classes from './weatherData.module.css';
+import './weatherData.css';
 
 const WeatherData = props => (
-  <div className={classes.WeatherData}>
+  <div className='WeatherData'>
     {props.city && (
       <Fragment>
         <p>
@@ -19,7 +19,7 @@ const WeatherData = props => (
         </p>
       </Fragment>
     )}
-    <p className={classes.Error}>{props.error}</p>
+    <p className='Error'>{props.error}</p>
   </div>
 );
 

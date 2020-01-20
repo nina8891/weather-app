@@ -2,8 +2,7 @@ import React from 'react';
 import Info from './components/info';
 import Form from './components/Form/form';
 import WeatherData from './components/WeatherData/weatherData';
-
-import './App.css';
+import './App.scss';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -34,20 +33,31 @@ class App extends React.Component {
       );
       const data = await api_url.json();
 
-      let sunset = data.sys.sunset;
-      let date = new Date();
-      date.setTime(sunset);
-      let sunset_date =
+      if (data.message === 'city not found') {
+        this.setState({
+          temp: undefined,
+          city: undefined,
+          country: undefined,
+          pressure: undefined,
+          sunset: undefined,
+          error: 'Please enter correct city name',
+        });
+      } else {
+        let sunset = data.sys.sunset;
+        let date = new Date();
+        date.setTime(sunset);
+        let sunset_date =
         date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
 
-      this.setState({
-        temp: data.main.temp,
-        city: data.name,
-        country: data.sys.country,
-        pressure: data.main.pressure,
-        sunset: sunset_date,
-        error: '',
-      });
+        this.setState({
+          temp: data.main.temp,
+          city: data.name,
+          country: data.sys.country,
+          pressure: data.main.pressure,
+          sunset: sunset_date,
+          error: '',
+        });
+      }
     } else {
       this.setState({
         temp: undefined,
